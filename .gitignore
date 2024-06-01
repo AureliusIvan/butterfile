@@ -1,3 +1,7 @@
 .env
 db.sqlite3
 env/*
+.idea
+
+#all pycache files
+__pycache__/
