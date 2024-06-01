@@ -1,0 +1,35 @@
+services:
+    web:
+        build: .
+        command: python manage.py runserver
+    django:
+        build: .
+        command: python manage.py runserver
+        volumes:
+            - .:/code
+            - static_volume:/code/static
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+            - redis
+    postgres:
+        image: postgres:12
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: mydb
+            POSTGRES_USER: myuser
+            POSTGRES_PASSWORD: mypassword
+        networks:
+            - mynetwork
+
+
+networks:
+    default:
+        external:
+            name: mynetwork
+
+volumes:
+    postgres_data:
+        external: true
