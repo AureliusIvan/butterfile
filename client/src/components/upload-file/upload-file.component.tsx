@@ -5,7 +5,7 @@ import useFileUpload from "@/hooks/useFileUpload.ts";
  * Props for the UploadFileComponent
  */
 interface UploadFileComponentProps {
-    callback: () => void;
+    callback: (file : File) => void;
     fileTypes: string[];
 }
 

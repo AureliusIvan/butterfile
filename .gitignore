@@ -5,3 +5,6 @@ env/*
 
 #all pycache files
 __pycache__/
+
+staticfiles/*
+media/*

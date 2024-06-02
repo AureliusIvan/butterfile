@@ -5,6 +5,6 @@ from converter_app.services.pdf_converter.pdf_converter import PdfConverter
 from . import views
 
 urlpatterns = [
-    path('convert/', ImageConverter.convert),
+    path('', views.index, name='index'),
     path('convert/pdf/jpg', views.pdf, name='pdf_to_jpg'),
 ]

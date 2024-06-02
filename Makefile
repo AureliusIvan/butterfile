@@ -10,5 +10,11 @@ install:
 freeze:
 	pip3 freeze > requirements.txt
 
+test:
+	@source env/bin/activate; python3 manage.py test
+
 dev:
 	@source env/bin/activate; python3 manage.py runserver
+
+collectstatic:
+	@source env/bin/activate; python3 manage.py collectstatic

@@ -5,10 +5,17 @@ export const Route = createLazyFileRoute('/docs/')({
 })
 
 function Docs() {
-  return <div className="p-2">
-    <h1>Docs</h1>
-    <p>
-      This is the docs page.
-    </p>
-  </div>
+  return (
+      <div className="p-2">
+        <h1
+        className={'text-4xl font-bold'}
+        >
+          Docs
+        </h1>
+
+        <p>
+          This is the docs page.
+        </p>
+      </div>
+  )
 }

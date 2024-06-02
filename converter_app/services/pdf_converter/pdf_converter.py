@@ -1,31 +1,41 @@
-from django.http import JsonResponse
 from pdf2image import convert_from_path
-import os
+from converter_app.services.converter.converter import Converter
 
 
-class PdfConverter:
+class PdfConverter(Converter):
     """
     A class to convert PDF files into many other formats
+    available formats are:
+    - jpg
+    - png
     """
 
-    def _move_file(self, file_path, new_path):
-        """
-        Moves a file from one location to another
-        :param file_path: The path to the file to move
-        :param new_path: The new path for the file
-        :return: The new path of the file
-        """
-        os.rename(file_path, new_path)
-        return new_path
+    def __init__(self, name, file):
+        super().__init__(name, file, 'pdf')
 
-    @staticmethod
-    def convert_to_jpg(pdf_path):
+    def _pdf_to_images(self):
         """
         Converts a PDF file to images
-        :param pdf_path: The path to the PDF file
-        :return: A list of images
         """
-        return JsonResponse({
-            'message': 'Conversion successful',
-            'data': convert_from_path(pdf_path)
-        })
+        # convert pdf to images
+        print(self.file_path)
+        image = convert_from_path("media/"
+                                  + self.file_path,
+                                  500)
+        image[0].save("media/"
+                      + self.name + ".jpg", "JPEG")
+
+        return "media/" + self.name + ".jpg"
+
+    def convert(self, target):
+        """
+        Converts a PDF file to images
+        """
+        # convert pdf to images
+        if target == 'jpg':
+            return self._pdf_to_images()
+        else:
+            raise ValueError('Invalid target format')
+
+    def submit(self):
+        pass

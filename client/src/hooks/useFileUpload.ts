@@ -5,8 +5,9 @@ import { useState, useEffect, ChangeEvent } from "react";
  * @param {() => void} callback - Function to be called when a file is uploaded
  * @param fileTypes
  * @returns {[File | null, (e: ChangeEvent<HTMLInputElement>) => void]} - The file and the change handler
+ *
  */
-const useFileUpload = (callback: () => void,
+const useFileUpload = (callback: (file: File) => void,
                        fileTypes: string[] = [],
                        ): [File | null, (e: ChangeEvent<HTMLInputElement>) => void] => {
     const [file, setFile] = useState<File | null>(null);
@@ -26,7 +27,7 @@ const useFileUpload = (callback: () => void,
 
     useEffect(() => {
         if (file) {
-            callback();
+            callback(file);
         }
     }, [file, callback]);
 
