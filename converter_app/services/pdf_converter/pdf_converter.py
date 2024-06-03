@@ -13,7 +13,7 @@ class PdfConverter(Converter):
     def __init__(self, name, file):
         super().__init__(name, file, 'pdf')
 
-    def _pdf_to_images(self):
+    def _pdf_to_images(self, target='jpg'):
         """
         Converts a PDF file to images
         """
@@ -22,18 +22,23 @@ class PdfConverter(Converter):
         image = convert_from_path("media/"
                                   + self.file_path,
                                   500)
-        image[0].save("media/"
-                      + self.name + ".jpg", "JPEG")
+        if target == 'jpg':
+            image[0].save("media/"
+                          + self.name + "." + target, "JPEG")
+        elif target == 'png':
+            image[0].save("media/"
+                          + self.name + "." + target, "PNG")
 
-        return "media/" + self.name + ".jpg"
+        return "media/" + self.name + "." + target
 
     def convert(self, target):
         """
         Converts a PDF file to images
         """
-        # convert pdf to images
         if target == 'jpg':
-            return self._pdf_to_images()
+            return self._pdf_to_images(target='jpg')
+        elif target == 'png':
+            return self._pdf_to_images(target='png')
         else:
             raise ValueError('Invalid target format')
 

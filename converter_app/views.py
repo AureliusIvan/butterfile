@@ -63,6 +63,14 @@ def pdf(request):
             'message': 'Conversion successful',
             'path': result_path
         }, status=200)
+    elif request.POST['type'] == 'png':
+        doc = PdfConverter(name=request.POST['name'], file=request.FILES['file'])
+        doc.save()
+        result_path = doc.convert('png')
+        return JsonResponse({
+            'message': 'Conversion successful',
+            'path': result_path
+        }, status=200)
     else:
         return JsonResponse({
             'message': 'Invalid request type, supported type is PDF'

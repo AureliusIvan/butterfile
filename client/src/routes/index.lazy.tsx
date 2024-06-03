@@ -38,11 +38,15 @@ function Index() {
           "
       >
 
-        <h1>
+        <h1
+            className={'text-4xl font-bold'}
+        >
           Welcome Home!
         </h1>
 
-        <h2>
+        <h2
+            className={'text-2xl font-bold'}
+        >
           Our Products
         </h2>
         {
