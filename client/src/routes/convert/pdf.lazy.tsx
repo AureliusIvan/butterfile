@@ -4,29 +4,34 @@ import axiosInstance from "@/libs/axios.config.ts";
 import UploadFileComponent from "@/components/upload-file/upload-file.component.tsx";
 import {ActionButton as Button} from "@/components/button/action-button.tsx";
 import {toast} from 'react-toastify'
-
+import {downloadFile} from "@/libs/downloadjs.config.ts";
 
 export const Route = createLazyFileRoute('/convert/pdf')({
   component: ConvertPdfPdf
 })
 
-const submitFile = async (file: File) => {
+const submitFile = async (file: File,
+                          convertTo: string = "jpg"): Promise<void> => {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('name', 'test');
-  formData.append('type', 'jpg');
-  return axiosInstance.post('/api/convert/pdf/jpg', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-      .then((res) => {
-        console.log(res.data.message)
-        return res.data
-      }).catch((err) => {
-        console.error(err)
-        return err as string
-      })
+  formData.append('name', file.name);
+  formData.append('type', convertTo);
+
+  try {
+    const res = await axiosInstance.post('/api/convert/pdf/img',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+    console.log(res.data);
+    toast.success(res.data.message);
+    downloadFile(res.data.path);
+  } catch (error) {
+    console.error(error);
+    toast.error('Error converting file');
+  }
 }
 
 function ConvertPdfPdf() {
@@ -48,27 +53,29 @@ function ConvertPdfPdf() {
           fileTypes: ['application/pdf']
         })}
 
-        <div>
+        <div
+        className={'flex gap-4'}
+        >
           <Button onClick={() => {
             if (!file) {
               toast.error('Please upload a file')
-              return
             }
 
-            submitFile(file as File)
-                .then(r => {
-                  toast.success('File converted successfully')
-                  console.log(r)
-                  window.open(
-                      import.meta.env.VITE_BACKEND_URL + "/" + r.path,
-                      '_blank'
-                  )
-                })
-                .catch(e => {
-                  console.error(e)
-                  toast.error('Error converting file')
-                })
-          }}> Convert to JPG
+            submitFile(file as File, 'jpg')
+                .catch((err) => console.error(err))
+          }}>
+            Convert to JPG
+          </Button>
+
+          <Button onClick={() => {
+            if (!file) {
+              toast.error('Please upload a file')
+            }
+
+            submitFile(file as File, 'png')
+                .catch((err) => console.error(err))
+          }}>
+            Convert to PNG
           </Button>
         </div>
       </main>

@@ -1,19 +1,21 @@
 import {createLazyFileRoute} from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/docs/')({
-  component: Docs,
+  component: DocPage,
 })
 
-function Docs() {
+function DocPage() {
   return (
       <div className="p-2">
         <h1
-        className={'text-4xl font-bold'}
+            className={'text-4xl font-bold'}
         >
           Docs
         </h1>
 
-        <p>
+        <p
+            className={'text-lg'}
+        >
           This is the docs page.
         </p>
       </div>

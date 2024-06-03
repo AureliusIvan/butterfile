@@ -16,5 +16,5 @@ test:
 dev:
 	@source env/bin/activate; python3 manage.py runserver
 
-collectstatic:
+collect static:
 	@source env/bin/activate; python3 manage.py collectstatic
