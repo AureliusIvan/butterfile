@@ -25,7 +25,7 @@ pure-eval==0.2.3
 Pygments==2.18.0
 python-dotenv==1.0.1
 six==1.16.0
-sqlparse==0.5.0
+sqlparse==0.5.1
 stack-data==0.6.3
 traitlets==5.14.3
 wcwidth==0.2.13
