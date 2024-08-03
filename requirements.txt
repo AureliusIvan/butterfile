@@ -21,7 +21,7 @@ pikepdf==8.15.1
 pillow==10.3.0
 prompt_toolkit==3.0.47
 ptyprocess==0.7.0
-pure-eval==0.2.2
+pure-eval==0.2.3
 Pygments==2.18.0
 python-dotenv==1.0.1
 six==1.16.0
