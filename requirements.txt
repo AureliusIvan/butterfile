@@ -19,7 +19,7 @@ pdf2image==1.17.0
 pexpect==4.9.0
 pikepdf==9.2.1
 pillow==11.0.0
-prompt_toolkit==3.0.47
+prompt_toolkit==3.0.48
 ptyprocess==0.7.0
 pure-eval==0.2.3
 Pygments==2.18.0
