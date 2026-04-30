@@ -22,7 +22,7 @@ pillow==11.0.0
 prompt_toolkit==3.0.47
 ptyprocess==0.7.0
 pure-eval==0.2.3
-Pygments==2.18.0
+Pygments==2.20.0
 python-dotenv==1.0.1
 six==1.16.0
 sqlparse==0.5.1
