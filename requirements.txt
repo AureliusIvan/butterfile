@@ -14,7 +14,7 @@ lxml==5.3.0
 Markdown==3.7
 matplotlib-inline==0.1.7
 packaging==24.1
-parso==0.8.4
+parso==0.8.7
 pdf2image==1.17.0
 pexpect==4.9.0
 pikepdf==9.2.1
